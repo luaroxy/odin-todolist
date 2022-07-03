@@ -1,0 +1,27 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+#container {
+    display: grid;
+    grid: 10vh 1fr / clamp(13rem, 18%, 20rem) 1fr;
+    min-height: 100vh;
+}
+
+#header {
+    grid-column: 1/3;
+    background-color: #89d8d3b9;
+    background-image: linear-gradient(315deg, #89d8d3bd 0%, #03c8a7b4 74%);
+}
+
+#sidebar{
+    background-color: #d5fefd7c;
+  
+}
+
+#mainContent{
+    background-color: #d5fefd;
+    background-image: linear-gradient(315deg, #d5fefd 0%, #fffcff 74%);
+}
