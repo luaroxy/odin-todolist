@@ -75,3 +75,78 @@ button, input[type="submit"], input[type="reset"] {
     transform: translate(-50%, -50%);
     z-index: 3;
 }
+
+.form-container{
+    width:50vw;
+    background:#e1e1e17c;
+    border-radius:8px;
+    box-shadow: 4px 4px 5px 0px #00000085;
+    padding: 2vh 2vw;
+}
+  
+.rowContainer{
+    display: flex;
+    gap: 1rem;
+}
+  
+.form-buttons{
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+}
+  
+.inputContent{
+    display:flex;
+    flex-direction:column;
+    margin-top: 2vh;
+}
+  
+.form-container label{
+    font-family: 'Montserrat', monospace;
+    font-weight: 625;
+    letter-spacing: .02rem;
+    font-size: clamp(0.8rem, 1vw, 3rem)
+}
+  
+.form-container h2{
+    margin:0.5vh 0;
+    padding-bottom:0.25vh;
+    width:10vw;
+    font-size: clamp(1rem, 1.3vw, 4rem);
+    color:#78788c;
+    border-bottom:3px solid #78788c;
+}
+  
+.form-container input, .form-container textarea, .form-container select {
+    width:100%;
+    padding:10px;
+    box-sizing:border-box;
+    background:none;
+    outline:none;
+    resize:none;
+    border:0;
+    font-family:'Montserrat',sans-serif;
+    transition:all .3s;
+    border-bottom:2px solid #bebed2;
+}
+  
+.form-container input:focus, .form-container textarea:focus, .form-container select:focus{
+    border-bottom:2px solid #78788c
+}
+  
+.form-container button{
+    padding:8px 12px;
+    margin:8px 0 0;
+    font-family:'Montserrat',sans-serif;
+    border:2px solid #78788c;
+    background:0;
+    color:#5a5a6e;
+    cursor:pointer;
+    transition:all .3s;
+    font-size: clamp(0.8rem, 1vw, 2rem);
+}
+  
+.form-container button:hover{
+    background:#78788c;
+    color:#fff
+}
