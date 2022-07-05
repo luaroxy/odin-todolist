@@ -119,7 +119,7 @@ button, input[type="submit"], input[type="reset"] {
   
 .form-container input, .form-container textarea, .form-container select {
     width:100%;
-    padding:10px;
+    padding:0.9vh;
     box-sizing:border-box;
     background:none;
     outline:none;
@@ -135,8 +135,8 @@ button, input[type="submit"], input[type="reset"] {
 }
   
 .form-container button{
-    padding:8px 12px;
-    margin:8px 0 0;
+    padding:0.5vh 0.5vw;
+    margin:1vh 0 0;
     font-family:'Montserrat',sans-serif;
     border:2px solid #78788c;
     background:0;
