@@ -23,15 +23,17 @@
 
       <div id="addTaskForm">
         <form class="form-container" id="bookForm">
+          
+          <h2>New Task</h2>
 
           <div class="inputContent">
             <label for="taskName"><b>TASK NAME<abbr title="required" aria-label="required">*</b></label>
-            <input type="text" name="taskName" required>
+            <input type="text" id="taskName" name="taskName" required placeholder="Write here the task name">
           </div>
 
           <div class="inputContent">
             <label for="taskDescription"><b>DESCRIPTION</b></label>
-            <textarea name="taskDescription"></textarea>
+            <textarea name="taskDescription" id="taskDescription" placeholder="Write here the task description"></textarea>
           </div>
 
           <div class = "rowContainer">
@@ -42,20 +44,20 @@
 
             <div class="inputContent">
                 <label for="taskProject"><b>PROJECT</b></label>
-                <select name="taskProject">
+                <select name="taskProject" id="taskProject">
                   <option value="inbox" selected>Inbox</option>
                 </select>
             </div>
 
             <div class="inputContent">
               <label for="taskPriority"><b>PRIORITY</b></label>
-              <select name="taskPriority">
+              <select name="taskPriority" id="taskPriority">
                 <option value="noPriority" selected>No Priority</option>
                 <option value="lowPriority">Low Priority</option>
                 <option value="mediumPriority">Medium Priority</option>
                 <option value="highPriority">High Priority</option>
               </select>
-          </div>
+            </div>
 
           </div>
           
@@ -63,6 +65,7 @@
             <button type="submit" id="addBtn" class="btn">Add</button>
             <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
           </div>
+        
         </form>
       </div>
 
