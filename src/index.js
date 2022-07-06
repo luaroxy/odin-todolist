@@ -7,11 +7,12 @@ const addTaskButton = document.getElementById("addTaskButton").addEventListener(
 const closeAddTaskButton = document.getElementById("closeAddTaskButton").addEventListener("click", closeAddTaskForm);
 
 function openAddTaskForm() {
-    document.getElementById("addTaskForm").style.display = "block";
+    document.getElementById("addTaskFormContainer").style.display = "block";
 }
 
 function closeAddTaskForm() {
-  document.getElementById("addTaskForm").style.display = "none";
+  document.getElementById("addTaskFormContainer").style.display = "none";
 }
 
-console.log(todoList);
+
+export default closeAddTaskForm;

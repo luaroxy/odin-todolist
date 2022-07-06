@@ -67,7 +67,7 @@ button, input[type="submit"], input[type="reset"] {
     background-image: linear-gradient(0deg, #d5fefd 0%, #fffcff 74%);
 }
 
-#addTaskForm {
+#addTaskFormContainer {
     display: none;
     position: fixed;
     top: 50%;

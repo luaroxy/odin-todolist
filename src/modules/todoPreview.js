@@ -1,9 +1,15 @@
-import todoItem from '../modules/todoItem.js';
+import createTodoItem from '../modules/todoItem.js';
+import closeAddTaskForm from '../index.js'
 
 let todoList = [];
 
-let newTodoItem = new todoItem ("Wash dishes");
-todoList.push(newTodoItem);
-todoList.push(new todoItem ("Laundry","","July 12, 2022","","highPriority"));
+const addTaskForm = document.getElementById("addTaskForm");
+addTaskForm.addEventListener("submit", function (e) {
+	e.preventDefault();
+  todoList.push(createTodoItem());
+  addTaskForm.reset();
+  closeAddTaskForm();
+  console.log(todoList);
+});
 
 export default todoList;

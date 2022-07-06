@@ -1,5 +1,5 @@
 class todoItem {
-  constructor(name,description="",dueDate="",project="",priority="noPriority") {
+  constructor(name,description,dueDate,project,priority) {
     this.name = name;
     this.description = description;
     this.dueDate = dueDate;
@@ -9,7 +9,16 @@ class todoItem {
 }
 
 function createTodoItem(){
+  const addTaskForm = document.getElementById("addTaskForm");
+  let taskName = addTaskForm.elements["taskName"];
+  let taskDescription = addTaskForm.elements["taskDescription"];
+  let taskDueDate = addTaskForm.elements["taskDueDate"];
+  let taskProject = addTaskForm.elements["taskProject"];
+  let taskPriority = addTaskForm.elements["taskPriority"];
 
+  const newtodoItem = new todoItem(taskName.value,taskDescription.value,taskDueDate.value,taskProject.value,taskPriority.value);
+  
+  return newtodoItem;
 }
 
-export default todoItem;
+export default createTodoItem;
