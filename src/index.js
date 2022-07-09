@@ -1,8 +1,7 @@
 import './modules/style.css';
 import todoList from './modules/todoPreview.js';
 
-const content = document.getElementById("content");
-
+//Open/Close addTaskForm
 const addTaskButton = document.getElementById("addTaskButton").addEventListener("click", openAddTaskForm);
 const closeAddTaskButton = document.getElementById("closeAddTaskButton").addEventListener("click", closeAddTaskForm);
 

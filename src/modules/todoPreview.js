@@ -8,16 +8,16 @@ addTaskForm.addEventListener("submit", function (e) {
 	e.preventDefault();
   let newTodoItem = createTodoItem();
   todoList.push(createTodoItem());
-  mainContent.appendChild(displayTodoItem(newTodoItem));
+  displayTodoTasksContainer.appendChild(displayTodoItem(newTodoItem));
   addTaskForm.reset();
   closeAddTaskForm();
 });
 
-const mainContent = document.getElementById("mainContent");
+const displayTodoTasksContainer = document.getElementById("displayTodoTasksContainer");
 
 const projectName = document.createElement('h1');
 projectName.textContent = "Index";
-mainContent.appendChild(projectName);
+displayTodoTasksContainer.appendChild(projectName);
 
 function displayTodoItem (element){
   let todoTask = document.createElement("div");
@@ -28,6 +28,8 @@ function displayTodoItem (element){
   let taskDelete = document.createElement("button");
   let taskDuedate = document.createElement("p");
   let taskProject = document.createElement("p");
+
+  todoTask.classList.add("todoTask");
 
   taskCheckbox.type = "checkbox";
   taskCheckbox.id =  "checkTask";

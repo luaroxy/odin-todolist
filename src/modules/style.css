@@ -27,6 +27,7 @@ button, input[type="submit"], input[type="reset"] {
     min-height: 100vh;
 }
 
+/* HEADER */
 #header {
     grid-column: 1/3;
     background-color: #89d8d3b9;
@@ -57,16 +58,13 @@ button, input[type="submit"], input[type="reset"] {
     width: clamp(1rem, 2.3vw, 3rem);
 }
 
+/* SIDERBAR */
 #sidebar{
     background-color: #e1e1e17c;
   
 }
 
-#mainContent{
-    background-color: #d5fefd;
-    background-image: linear-gradient(0deg, #d5fefd 0%, #fffcff 74%);
-}
-
+/* ADD TASK FORM */
 #addTaskFormContainer {
     display: none;
     position: fixed;
@@ -149,4 +147,61 @@ button, input[type="submit"], input[type="reset"] {
 .form-container button:hover{
     background:#78788c;
     color:#fff
+}
+
+/* MAIN CONTENT - display Todo Items */
+#mainContent{
+    background-color: #d5fefd;
+    background-image: linear-gradient(0deg, #d5fefd 0%, #fffcff 74%);
+}
+
+#displayTodoTasksContainer{
+    padding: 35px 55px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#displayTodoTasksContainer h1{
+}
+
+.todoTask {
+    display: grid;
+    grid: 1fr 1fr 1fr / fit-content(100px) 1fr 1fr 1fr 1fr 1fr;
+    margin-top: 3vh;
+}
+
+.todoTask input{
+    grid-row: 1/4;
+    
+    width: clamp(1rem,max(1vh,1vw),3rem);
+    height: clamp(1rem,max(1vh,1vw),3rem);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.todoTask input:checked {
+    background-color: gray;
+}
+
+.todoTask h1{
+    grid-column: 2/7;
+}
+
+.todoTask p:first-of-type{
+    grid-column: 2/7;
+}
+
+
+
+
+
+@media (max-width: 768px) {
+    #sidebar {
+        display: none;
+    }
+    #mainContent{
+        grid-column: 1/3;
+    }
 }
