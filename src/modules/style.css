@@ -149,6 +149,7 @@ button, input[type="submit"], input[type="reset"] {
     color:#fff
 }
 
+
 /* MAIN CONTENT - display Todo Items */
 #mainContent{
     background-color: #d5fefd;
@@ -166,35 +167,112 @@ button, input[type="submit"], input[type="reset"] {
 
 .todoTask {
     display: grid;
-    grid: 1fr 1fr 1fr / fit-content(100px) 1fr 1fr 1fr 1fr 1fr;
+    grid: 1fr 1fr 1fr / 2.5rem fit-content(300px) fit-content(300px) 1fr 20px 20px;
     margin-top: 3vh;
+    border-bottom:1px solid #78788c;
 }
 
-.todoTask input{
+.checkboxContainer {
+    position: relative;
     grid-row: 1/4;
-    
-    width: clamp(1rem,max(1vh,1vw),3rem);
-    height: clamp(1rem,max(1vh,1vw),3rem);
+}
+  
+.checkboxContainer label {
     background-color: #fff;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(80, 80, 80);
     border-radius: 50%;
     cursor: pointer;
+    width: clamp(1.5rem,max(2vh,2vw),2rem);
+    height: clamp(1.5rem,max(2vh,2vw),2rem);
+    left: 0;
+    position: absolute;
+    top: 0;
 }
-
-.todoTask input:checked {
-    background-color: gray;
+  
+.checkboxContainer label:after {
+    border: 2.5px solid #fff;
+    border-top: none;
+    border-right: none;
+    content: "";
+    height: calc(clamp(1.5rem,max(2vh,2vw),2rem)/4.67);
+    left: calc(clamp(1.5rem,max(2vh,2vw),2rem)/5);
+    opacity: 0;
+    position: absolute;
+    top: calc(clamp(1.5rem,max(2vh,2vw),2rem)/4.5);;
+    transform: rotate(-45deg);
+    width: calc(clamp(1.5rem,max(2vh,2vw),2rem)/2.33);
+}
+  
+.checkboxContainer input[type="checkbox"] {
+    visibility: hidden;
+}
+  
+.checkboxContainer input[type="checkbox"]:checked + label {
+    background-color: #e1e1e17c;
+    border-color: #fefffe;
+}
+  
+.checkboxContainer input[type="checkbox"]:checked + label:after {
+    opacity: 1;
 }
 
 .todoTask h1{
     grid-column: 2/7;
+    font-size: min(3vmin, 1.3rem)
 }
 
 .todoTask p:first-of-type{
     grid-column: 2/7;
 }
 
+.todoTask p{
+    font-size: min(2.5vmin, 0.8rem);
+    margin-right: 10px;
+}
 
+.todoTask p:nth-of-type(2):before {
+    content: "";
+    display: block;
+    background: url("../images/calendar.svg") no-repeat;
+    width: 15px;
+    height: 15px;
+    float: left;
+    margin: 0 6px 0 0;
+}
 
+.todoTask p:nth-of-type(3):before {
+    content: "";
+    display: block;
+    background: url("../images/folder.svg") no-repeat;
+    width: 15px;
+    height: 15px;
+    float: left;
+    margin: 0 6px 0 0;
+}
+
+.todoTask button:first-of-type {
+    grid-column: 5/6;
+    content: "";
+    display: block;
+    background: url("../images/edit.svg") no-repeat;
+    width: 15px;
+    height: 15px;
+    float: left;
+    margin: 0 6px 0 0;
+    opacity: 0.6;
+}
+
+.todoTask button:nth-of-type(2) {
+    grid-column: 6/7;
+    content: "";
+    display: block;
+    background: url("../images/delete.svg") no-repeat;
+    width: 15px;
+    height: 15px;
+    float: left;
+    margin: 0 6px 0 0;
+    opacity: 0.6;
+}
 
 
 @media (max-width: 768px) {

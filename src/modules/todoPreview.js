@@ -21,7 +21,9 @@ displayTodoTasksContainer.appendChild(projectName);
 
 function displayTodoItem (element){
   let todoTask = document.createElement("div");
+  let checkboxContainer = document.createElement("div");
   let taskCheckbox = document.createElement("input");
+  let labelCheckbox = document.createElement("label");
   let taskName = document.createElement("h1");
   let taskDescription = document.createElement("p");
   let taskEdit = document.createElement("button");
@@ -30,17 +32,21 @@ function displayTodoItem (element){
   let taskProject = document.createElement("p");
 
   todoTask.classList.add("todoTask");
+  checkboxContainer.classList.add("checkboxContainer");
 
   taskCheckbox.type = "checkbox";
-  taskCheckbox.id =  "checkTask";
+  taskCheckbox.id =  "checkTask" + (todoList.length-1).toString();
   taskCheckbox.name = "checkTask";
+  labelCheckbox.htmlFor =  "checkTask" + (todoList.length-1).toString();
+  checkboxContainer.appendChild(taskCheckbox);
+  checkboxContainer.appendChild(labelCheckbox);
 
   taskName.textContent= element.name;
   taskDescription.textContent= element.description ;
   taskDuedate.textContent= element.dueDate;
   taskProject.textContent= element.project;
 
-  todoTask.appendChild(taskCheckbox);
+  todoTask.appendChild(checkboxContainer);
   todoTask.appendChild(taskName);
   todoTask.appendChild(taskDescription);
   todoTask.appendChild(taskDuedate);
