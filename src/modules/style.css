@@ -179,7 +179,6 @@ button, input[type="submit"], input[type="reset"] {
   
 .checkboxContainer label {
     background-color: #fff;
-    border: 1px solid rgb(80, 80, 80);
     border-radius: 50%;
     cursor: pointer;
     width: clamp(1.5rem,max(2vh,2vw),2rem);

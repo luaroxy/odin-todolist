@@ -38,6 +38,7 @@ function displayTodoItem (element){
   taskCheckbox.id =  "checkTask" + (todoList.length-1).toString();
   taskCheckbox.name = "checkTask";
   labelCheckbox.htmlFor =  "checkTask" + (todoList.length-1).toString();
+  setPriorityColor(element,labelCheckbox);
   checkboxContainer.appendChild(taskCheckbox);
   checkboxContainer.appendChild(labelCheckbox);
 
@@ -57,6 +58,21 @@ function displayTodoItem (element){
   return todoTask;
 }
   
-  
+function setPriorityColor(element, todoTask){
+  let priority = element.priority;
+  switch(priority) {
+    case "lowPriority":
+      todoTask.style.border = "2px solid blue";
+      break;
+    case "mediumPriority":
+      todoTask.style.border = "2px solid yellow";
+      break;
+    case "highPriority":
+      todoTask.style.border = "2px solid red";
+      break;
+    default:
+      todoTask.style.border = "2px solid rgb(80, 80, 80)";
+  }
+}
 
 export default todoList;
