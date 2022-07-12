@@ -33,6 +33,7 @@ function displayTodoItem (element){
   let taskProject = document.createElement("p");
 
   todoTask.classList.add("todoTask");
+  todoTask.setAttribute('id',element.id);
   checkboxContainer.classList.add("checkboxContainer");
 
   taskCheckbox.type = "checkbox";
