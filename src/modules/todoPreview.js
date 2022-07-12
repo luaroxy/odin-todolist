@@ -1,5 +1,6 @@
 import createTodoItem from '../modules/todoItem.js';
-import closeAddTaskForm from '../index.js'
+import closeAddTaskForm from '../index.js';
+import { v4 as uuidv4 } from 'uuid';
 
 let todoList = [];
 
@@ -35,9 +36,10 @@ function displayTodoItem (element){
   checkboxContainer.classList.add("checkboxContainer");
 
   taskCheckbox.type = "checkbox";
-  taskCheckbox.id =  "checkTask" + (todoList.length-1).toString();
+  let newTaskID = uuidv4();
+  taskCheckbox.id =  newTaskID;
   taskCheckbox.name = "checkTask";
-  labelCheckbox.htmlFor =  "checkTask" + (todoList.length-1).toString();
+  labelCheckbox.htmlFor =  newTaskID;
   setPriorityColor(element,labelCheckbox);
   checkboxContainer.appendChild(taskCheckbox);
   checkboxContainer.appendChild(labelCheckbox);
