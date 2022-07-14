@@ -1,17 +1,18 @@
-import createTodoItem from '../modules/todoItem.js';
-import closeAddTaskForm from '../index.js';
+import createTodoItem from './todoItem.js';
+import toggleTaskFormVisibility from '../index.js';
 import { v4 as uuidv4 } from 'uuid';
+import TodoList from './todoList.js';
 
-let todoList = [];
+let todoList = new TodoList();
 
 const addTaskForm = document.getElementById("addTaskForm");
 addTaskForm.addEventListener("submit", function (e) {
 	e.preventDefault();
   let newTodoItem = createTodoItem();
-  todoList.push(newTodoItem);
+  todoList.add(newTodoItem);
   displayTodoTasksContainer.appendChild(displayTodoItem(newTodoItem));
   addTaskForm.reset();
-  closeAddTaskForm();
+  toggleTaskFormVisibility(false);
 });
 
 const displayTodoTasksContainer = document.getElementById("displayTodoTasksContainer");
@@ -85,10 +86,7 @@ function setPriorityColor(element, todoTask){
 function deleteTask(){
   let taskID = this.dataset.taskid;
   document.getElementById(taskID).remove();
-
-  todoList.forEach((item,index)=>{
-    if(item.id === taskID) todoList.splice(index,1);
-  })
+  todoList.removeById(taskID);
 }
 
 export default todoList;
