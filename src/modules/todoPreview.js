@@ -8,7 +8,7 @@ const addTaskForm = document.getElementById("addTaskForm");
 addTaskForm.addEventListener("submit", function (e) {
 	e.preventDefault();
   let newTodoItem = createTodoItem();
-  todoList.push(createTodoItem());
+  todoList.push(newTodoItem);
   displayTodoTasksContainer.appendChild(displayTodoItem(newTodoItem));
   addTaskForm.reset();
   closeAddTaskForm();
@@ -50,6 +50,10 @@ function displayTodoItem (element){
   taskDuedate.textContent= element.dueDate;
   taskProject.textContent= element.project;
 
+  taskDelete.classList.add("deleteButton");
+  taskDelete.setAttribute('data-taskid',element.id);
+  taskDelete.addEventListener("click", deleteTask);
+
   todoTask.appendChild(checkboxContainer);
   todoTask.appendChild(taskName);
   todoTask.appendChild(taskDescription);
@@ -76,6 +80,15 @@ function setPriorityColor(element, todoTask){
     default:
       todoTask.style.border = "2px solid rgb(80, 80, 80)";
   }
+}
+
+function deleteTask(){
+  let taskID = this.dataset.taskid;
+  document.getElementById(taskID).remove();
+
+  todoList.forEach((item,index)=>{
+    if(item.id === taskID) todoList.splice(index,1);
+  })
 }
 
 export default todoList;
