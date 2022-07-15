@@ -1,17 +1,5 @@
 # Code Review 2nd Part
 
-## Remove /dist folder from git index
-
-Your /dist folder is still indexed in git (i.e. changes inside are tracked by git). To remove it, run this command inside your root folder:
-
-```git rm --cached -r dist ```
-
-All files inside /dist have now been marked for removal from the index. Commit and push the changes. Then remove the `dist` folder manually from your filesystem. Next, add this line to your `.gitignore` file to tell git to ignore files and changes in that folder in the future:
-
-```dist/```
-
-Again, commit the changes and push. Now we won't have to deal with the /dist folder any more and changes therein won't pollute our git history.
-
 ## Move all images into the /image folder
 
 You are saving images to a separate `imagesHTML` folder. That works but makes me wonder: Why two folders? What's special about `imagesHTML` as compared to `images`? Let's fix that and save images to just one location `images`. Move the files from `imagesHTML` into `images`, the remove the former folder. Adjust your references inside `index.html` accordingly. Then adjust your `webpack.config.js` file:
@@ -51,3 +39,17 @@ Now, you are learning about OOP. As you know, objects have state and behavior, t
 I think it would be quite handy to turn that list into a more specific type instead of an array. To do so, I have defined a class `TodoList` (by convention class names in JS are in PascalCase) in the `todoList.js` file.
 
 Have a look at the class and see where I changed the corresponding client code inside the `todoPreview.js` file.
+
+## Testing `todoList.js`
+
+You have spotted a mistake in my last implementation, very well done! **I am sorry I wasn't up to my standards. That mistake shouldn't have happened. I'll make sure it won't happen again.**
+
+To prevent further mistakes, and also because it is an awesome way to demonstrate the value of testing, I have decided to add unit tests to our project.
+
+To test our `TodoList` implementation, I have added and configured the Jest testing framework, which is also used by the [Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-testing-basics).
+
+You should run `npm install` again to make sure all dependencies of Jest are installed. Then run `npm test` to run your tests.
+
+Have a look at the file `todoList.test.js`. It contains the tests for the module of the same name. These should be relatively straight-forward and self-evident.
+
+Hint: For VSCode there is a neat extension that will help you run your tests whenever you change your code. It also adds nice UI support. Have a look and check the extensions page for 'vscode-jest'.

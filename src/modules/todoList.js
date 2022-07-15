@@ -2,23 +2,22 @@ export default class TodoList
 {
     constructor()
     {
-        this.items = [];
+        // a simple object will be used as a dictionary to store items (values) by their ids (keys)
+        this.itemsById = {};
+    }
+    
+    get items()
+    {
+        return Object.values(this.itemsById);
     }
     
     add(newItem)
     {
-        this.items.push(newItem);
+        // attention: if the key already exists, its value will be overwritten
+        this.itemsById[newItem.id] = newItem;
     }
     removeById(id)
     {
-        const indexOfItemWithId = this.items.indexOf(id);
-        
-        // not found?
-        if(indexOfItemWithId == -1)
-        {
-            return;
-        }
-
-        this.items.splice(indexOfItemWithId, 1);
+        delete this.itemsById[id];
     }
 }
