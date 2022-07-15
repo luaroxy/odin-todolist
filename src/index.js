@@ -1,17 +1,16 @@
 import './modules/style.css';
 import todoList from './modules/todoPreview.js';
 
-//Open/Close addTaskForm
-const addTaskButton = document.getElementById("addTaskButton").addEventListener("click", openAddTaskForm);
-const closeAddTaskButton = document.getElementById("closeAddTaskButton").addEventListener("click", closeAddTaskForm);
+document.getElementById("addTaskButton")
+        .addEventListener("click", () => toggleTaskFormVisibility(true));
 
-function openAddTaskForm() {
-    document.getElementById("addTaskFormContainer").style.display = "block";
+document.getElementById("closeAddTaskButton")
+        .addEventListener("click", () => toggleTaskFormVisibility(false));
+
+function toggleTaskFormVisibility(visible)
+{
+  const displayValue = visible ? 'block' : 'none';
+  document.getElementById("addTaskFormContainer").style.display = displayValue;
 }
 
-function closeAddTaskForm() {
-  document.getElementById("addTaskFormContainer").style.display = "none";
-}
-
-
-export default closeAddTaskForm;
+export default toggleTaskFormVisibility;
