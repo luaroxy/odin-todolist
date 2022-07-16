@@ -19,37 +19,39 @@
       <section id="sidebar"></section>
 
       <section id="mainContent">
-        <div id="displayTodoTasksContainer"></div>
+        <div id="displayTodoTasksContainer">
+          <h1>Index</h1>
+        </div>
       </section>
-
+      
       <div id="addTaskFormContainer">
         <form class="form-container" id="addTaskForm">
           
           <h2>New Task</h2>
-
+      
           <div class="inputContent">
             <label for="taskName"><b>TASK NAME<abbr title="required" aria-label="required">*</b></label>
             <input type="text" id="taskName" name="taskName" required placeholder="Write here the task name">
           </div>
-
+      
           <div class="inputContent">
             <label for="taskDescription"><b>DESCRIPTION</b></label>
             <textarea name="taskDescription" id="taskDescription" placeholder="Write here the task description"></textarea>
           </div>
-
+      
           <div class = "rowContainer">
             <div class="inputContent">
                 <label for="taskDueDate"><b>DUE DATE</b></label>
                 <input type="date" id="taskDueDate" name="taskDueDate">
             </div>
-
+      
             <div class="inputContent">
                 <label for="taskProject"><b>PROJECT</b></label>
                 <select name="taskProject" id="taskProject">
                   <option value="Inbox" selected>Inbox</option>
                 </select>
             </div>
-
+      
             <div class="inputContent">
               <label for="taskPriority"><b>PRIORITY</b></label>
               <select name="taskPriority" id="taskPriority">
@@ -59,7 +61,7 @@
                 <option value="highPriority">High Priority</option>
               </select>
             </div>
-
+      
           </div>
           
           <div class="form-buttons">
@@ -72,4 +74,20 @@
 
     </div>
   </body>
+
+  <!-- TEMPLATES -->
+  <template id="todoItemTemplate">
+    <div class="todoTask">
+      <div class="checkboxContainer">
+        <label name="checkBoxLabel" for="">
+        <input type="checkbox" name="checkTask" />
+      </div>
+      <h1>Name</h1>
+      <p class="desc">Desc</p>
+      <p class="due">Due</p>
+      <p class="project">Project</p>
+      <button></button>
+      <button class="deleteButton"></button>
+    </div>
+  </template>
 </html>

@@ -1,55 +1,55 @@
-# Code Review 2nd Part
+# Code Review 3rd Part
 
-## Move all images into the /image folder
+This is a huge review. I hope it is not too much. I am introducing the important concept of MVC to refactor your codebase. I have given it some time to see if this is the right step at this time, and from what I can infer you are ready for this.
 
-You are saving images to a separate `imagesHTML` folder. That works but makes me wonder: Why two folders? What's special about `imagesHTML` as compared to `images`? Let's fix that and save images to just one location `images`. Move the files from `imagesHTML` into `images`, the remove the former folder. Adjust your references inside `index.html` accordingly. Then adjust your `webpack.config.js` file:
+However, if you feel lost, don't worry. This is not an easy concept and we will need some time to hit it home. 
 
-```
-{ from: './src/images', to: 'images/' }
-```
+We can always take a step back and go through the following review part by part. Please let me know.
 
-## Refactoring `index.js`
 
-Have a look at the `index.js` file. I have refactored it a bit. These are all suggestions only.
+## Refactoring Project and Separating Concerns
 
-## Refactoring `todoPreview.js`
+We have a bit of refactoring to do. Why? Your code is working perfectly. That's the first step: Make it work. But when you look at it, there's something that should strike you as rather cumbersome: We have different concerns spread all over our files.
 
-Let's have a look at your `todoPreview.js` file. There's one part that immediately catches my eyes:
+All our files deal with the following concerns **at the same**:
++ time UI/markup concerns (for example, by creating and appending elements)
++ model concerns: by creating new todo items and assigning their properties
 
-```
-let todoList = [];
-```
+Having all those concerns spread over all files makes maintaining our codebase rather difficult. Contexts are so broad that it is tough figuring out what we are dealing with exactly in which file.
 
-Okay, it's an array that probably holds your todo list items. Then we have these operations on that array: Adding an item to the 'list':
+Consequently, we have to take the second step of our process: Make it readable/maintainable.
 
-```
-todoList.push(newTodoItem);
-```
+Luckily, there is a way we can achieve maintainability. We have to separate concerns and assign these to dedicated classes and files. This is known as the "Principle of Separation of Concerns" (SOC).
 
-and deleting an item from the 'list':
+In web development there is a common pattern to address SOC: MVC. This stands for Model - View - Controller and it a separation that works well in apps that offer a rich UI. In MVC we have the following parts and their concerns (cf. https://www.taniarascia.com/javascript-mvc-todo-app/):
 
-```
-todoList.forEach((item,index)=>{
-    if(item.id === taskID) todoList.splice(index,1);
-})
-```
++ Model: Is part of the model layer and deals only with our independent model (core business logic)
+    + the model knows about ToDo Items and the ToDo List
+    + it does *not* know about any UI or UI-related things, that's why it is "independent"
++ View: This is the UI part of our app and deals view everything dealing with the interface and visual representation of our app
+    + the view knows about models, as it needs to render these in the UI
++ Controller: This is the mediator between Model and View
+    + it is the part that knows both about our Model and our View
+    + it delegates user interaction (user events) on the view to the model
+    + and then makes sure that whenever the model changes (e.g. new to do items are created), the view is updated
 
-Now, you are learning about OOP. As you know, objects have state and behavior, that is they define properties/variables and functions, respectively. Our `todoList` is a perfect example of this: it saves items (state) and lets you operate on these (add/remove them).
+I have refactored your entire app. It was a lot of work and I hope you can bear with me:
 
-I think it would be quite handy to turn that list into a more specific type instead of an array. To do so, I have defined a class `TodoList` (by convention class names in JS are in PascalCase) in the `todoList.js` file.
++ the entire app logic is now inside the `app` folder
++ the models are inside the `app/models` subfolder:
+    + `appModel.js`: deals with general app model concerns: creating new ToDo items, appending them to our list, removing them from our list;
+    + `todoItem.js`: represents the data structure of one ToDo item;
+    + `todoList.js`: represents the list of ToDo items and its operations;
++ the views are inside the `app/views` subfolder:
+    + `appView.js`: handles general app UI state, e.g. appending new ToDo items to the DOM, removing them, handling UI events and communicating them to the controllers
+    + `todoItemView.js`: handles todo items in the UI layer, e.g. rendering ToDo items and updating these in the DOM
++ there is one controller inside the `app/controllers` subfolder:
+    + `appController.js`: mediates between the app model and view
 
-Have a look at the class and see where I changed the corresponding client code inside the `todoPreview.js` file.
+The AppControler is the root component of your app, which is why it is instantiated inside the main JS file `app/app.js`. The entire app flow logic starts there and reacts to user and UI events.
 
-## Testing `todoList.js`
+## Template
 
-You have spotted a mistake in my last implementation, very well done! **I am sorry I wasn't up to my standards. That mistake shouldn't have happened. I'll make sure it won't happen again.**
+Inside the `index.html` I have added a `<template>` tag, which contains the template for new ToDo items inside the DOM. This procedure replaces the DOM manipulation logic that you used before (creating elements and appending them upon creating a new ToDo item). This has the benefit of keeping the markup inside the HTML file and thus visible and easy to handle for CSS rendering and handloing.
 
-To prevent further mistakes, and also because it is an awesome way to demonstrate the value of testing, I have decided to add unit tests to our project.
-
-To test our `TodoList` implementation, I have added and configured the Jest testing framework, which is also used by the [Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-testing-basics).
-
-You should run `npm install` again to make sure all dependencies of Jest are installed. Then run `npm test` to run your tests.
-
-Have a look at the file `todoList.test.js`. It contains the tests for the module of the same name. These should be relatively straight-forward and self-evident.
-
-Hint: For VSCode there is a neat extension that will help you run your tests whenever you change your code. It also adds nice UI support. Have a look and check the extensions page for 'vscode-jest'.
+The template is read and its content is cloned inside the `appendTodoItem()` function in the App View (`app/views/appView.js` file). For more details on HTML templates, please have a look here: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template.
