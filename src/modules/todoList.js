@@ -15,6 +15,10 @@ export default class TodoList
         return Object.values(this.itemsById);
     }
 
+    getItemByID(id)
+    {
+        return this.itemsById[id];
+    }
 
     removeById(id)
     {

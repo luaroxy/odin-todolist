@@ -4,10 +4,17 @@ import toggleTaskFormVisibility from '../index.js';
 import { v4 as uuidv4 } from 'uuid';
 
 let todoList = new TodoList();
+let checkEditTask = {status: "false", id: ""};
 
 const addTaskForm = document.getElementById("addTaskForm");
 addTaskForm.addEventListener("submit", function (e) {
 	e.preventDefault();
+  if (checkEditTask.status==true){
+   let taskID = checkEditTask.id;
+   document.getElementById(taskID).remove();
+   todoList.removeById(taskID);
+   checkEditTask.status = false;
+  }
   let newTodoItem = createTodoItem();
   todoList.add(newTodoItem);
   displayTodoTasksContainer.appendChild(displayTodoItem(newTodoItem));
@@ -55,6 +62,9 @@ function displayTodoItem (element){
   taskDelete.setAttribute('data-taskid',element.id);
   taskDelete.addEventListener("click", deleteTask);
 
+  taskEdit.setAttribute('data-taskid',element.id);
+  taskEdit.addEventListener("click", editTask);
+
   todoTask.appendChild(checkboxContainer);
   todoTask.appendChild(taskName);
   todoTask.appendChild(taskDescription);
@@ -88,5 +98,19 @@ function deleteTask(){
   document.getElementById(taskID).remove();
   todoList.removeById(taskID);
 }
+
+function editTask(){
+  let taskID = this.dataset.taskid;
+  let itemToEdit = todoList.getItemByID(taskID);
+  addTaskForm.elements["taskName"].value = itemToEdit.name;
+  addTaskForm.elements["taskDescription"].value = itemToEdit.description;
+  addTaskForm.elements["taskDueDate"].value = itemToEdit.dueDate;
+  addTaskForm.elements["taskProject"].value = itemToEdit.project;
+  addTaskForm.elements["taskPriority"].value = itemToEdit.priority;
+  checkEditTask.status = true;
+  checkEditTask.id = taskID;
+  toggleTaskFormVisibility(true);
+}
+
 
 export default todoList;
