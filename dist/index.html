@@ -19,7 +19,9 @@
       <section id="sidebar"></section>
 
       <section id="mainContent">
-        <div id="displayTodoTasksContainer"></div>
+        <div id="displayTodoTasksContainer">
+          <h1>Index</h1>
+        </div>
       </section>
 
       <div id="addTaskFormContainer">
@@ -72,4 +74,19 @@
 
     </div>
   <script defer src="main.js"></script></body>
+  <!-- TEMPLATES -->
+  <template id="todoItemTemplate">
+    <div class="todoTask">
+      <div class="checkboxContainer">
+        <input type="checkbox" name="checkTask">
+        <label name="checkBoxLabel" for=""></label>
+      </div>
+      <h1>Name</h1>
+      <p class="desc">Desc</p>
+      <p class="due">Due</p>
+      <p class="project">Project</p>
+      <button class="editButton"></button>
+      <button class="deleteButton"></button>
+    </div>
+  </template>
 </html>
