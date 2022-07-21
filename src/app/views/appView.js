@@ -45,7 +45,15 @@ export default class AppView
     {
         // get template markup and clone element (deep copy)
         let templateContent = this.todoItemTemplate.content;
-        let todoItemDivElementClone = templateContent.cloneNode(true).querySelector("div");
+
+        /*
+        we query for the first div because the templateContent above really just returns
+        a DocumentFragment, not the actual element; the TodoItemView constructor expects
+        an element, though.
+        Check: console.log('templateContent', templateContent);
+        See also: https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment
+        */
+        let todoItemDivElementClone = templateContent.cloneNode(true).querySelector('div');
         let todoItemView = new TodoItemView(todoItemDivElementClone, item);
         
         // then insert cloned markup as new child of todo tasks container
