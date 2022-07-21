@@ -77,16 +77,16 @@ export default class TodoItemView
         switch(value)
         {
             case "lowPriority":
-                this.element.style.border = "2px solid blue";
+                this.checkboxLabel.style.border = "2px solid blue";
                 break;
             case "mediumPriority":
-                this.element.style.border = "2px solid yellow";
+                this.checkboxLabel.style.border = "2px solid yellow";
                 break;
             case "highPriority":
-                this.element.style.border = "2px solid red";
+                this.checkboxLabel.style.border = "2px solid red";
                 break;
             default:
-                this.element.style.border = "2px solid rgb(80, 80, 80)";
+                this.checkboxLabel.style.border = "2px solid rgb(80, 80, 80)";
         }
     }
 }
