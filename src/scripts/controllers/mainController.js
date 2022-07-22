@@ -14,29 +14,41 @@ export default class MainController
 
     onAddTaskFormSubmit(e)
     {
-        // prevent submit
         e.preventDefault();
 
-        if (this.onEditTodoItem.status == true)
-        {
-            this.deleteTodoItem(this.onEditTodoItem.element);
-            this.onEditTodoItem.status = false;
-        } 
-        const newTodoItem = this.createNewTodoItemFromFormInputs();        
-        this.appendAndHookUpNewTodoItemFromModel(newTodoItem);
+        this.onEditTodoItem.status == true ? this.updateTodoItem() : this.createNewTodoItem();
         this.view.resetAndCloseAddTaskForm();
     }
 
-    createNewTodoItemFromFormInputs()
+    createNewTodoItem()
     {
-        // extract properties from view (form elements)
+        const newTodoItem = this.createNewTodoItemFromFormInputs();        
+        this.appendAndHookUpNewTodoItemFromModel(newTodoItem);
+    }
+
+    updateTodoItem()
+    {
+        const formElements = this.getElementsFromFormInputs();
+        const newtest = this.model.updateTodoItem(this.onEditTodoItem.element,formElements.name, formElements.desc, formElements.dueDate, formElements.project, formElements.priority)
+        this.view.updateTodoItem(newtest);
+        this.onEditTodoItem.status = false;
+    }
+
+    getElementsFromFormInputs()
+    {
         const name = this.view.getAddTaskFormElementValueByName("taskName");
         const desc = this.view.getAddTaskFormElementValueByName("taskDescription");
         const dueDate = this.view.getAddTaskFormElementValueByName("taskDueDate");
         const project = this.view.getAddTaskFormElementValueByName("taskProject");
         const priority = this.view.getAddTaskFormElementValueByName("taskPriority");
 
-        return this.model.createAndAddNewTodoItem(name, desc, dueDate, project, priority);
+        return {name, desc, dueDate, project, priority};
+    }
+
+    createNewTodoItemFromFormInputs()
+    {
+        const formElements = this.getElementsFromFormInputs();
+        return this.model.createAndAddNewTodoItem(formElements.name, formElements.desc, formElements.dueDate, formElements.project, formElements.priority);
     }
 
     appendAndHookUpNewTodoItemFromModel(todoItem)
@@ -57,6 +69,7 @@ export default class MainController
         this.model.removeItemById(todoItemView.id);
         todoItemView.element.remove();
     }
+
     editTodoItem(todoItemView)
     {
         this.view.toggleAddTaskFormVisibility(true);

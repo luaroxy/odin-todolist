@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
-
 export default class TodoItemView
 {
     constructor(element, todoItemModel)
@@ -57,7 +55,7 @@ export default class TodoItemView
     {
         this.element.setAttribute("id", value);
 
-        const checkBoxId = `checkbox-${uuidv4()}`
+        const checkBoxId = `checkbox-${value}`
         this.checkbox.setAttribute("id", checkBoxId);
         this.checkboxLabel.setAttribute("for", checkBoxId);
     }

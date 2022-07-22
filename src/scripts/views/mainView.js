@@ -61,4 +61,9 @@ export default class MainView
         this.addTaskForm.elements["taskProject"].value = todoItemView.model.project;
         this.addTaskForm.elements["taskPriority"].value = todoItemView.model.priority;
     }
+    updateTodoItem(element)
+    {
+        let todoItemToUpdate = document.getElementById(element.id);
+        new TodoItemView(todoItemToUpdate,element.model);
+    }
 } 
