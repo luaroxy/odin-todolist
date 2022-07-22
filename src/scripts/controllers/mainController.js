@@ -29,8 +29,8 @@ export default class MainController
     updateTodoItem()
     {
         const formElements = this.getElementsFromFormInputs();
-        const newtest = this.model.updateTodoItem(this.onEditTodoItem.element,formElements.name, formElements.desc, formElements.dueDate, formElements.project, formElements.priority)
-        this.view.updateTodoItem(newtest);
+        const updatedTodoItem = this.model.updateTodoItem(this.onEditTodoItem.element,formElements.name, formElements.desc, formElements.dueDate, formElements.project, formElements.priority)
+        this.view.updateTodoItem(updatedTodoItem);
         this.onEditTodoItem.status = false;
     }
 
@@ -62,6 +62,9 @@ export default class MainController
         newTodoItemView.editButton.addEventListener("click", 
             () => this.editTodoItem(newTodoItemView));
 
+        newTodoItemView.checkbox.addEventListener("change", 
+            () => this.checkCheckbox(newTodoItemView));
+
     }
     
     deleteTodoItem(todoItemView)
@@ -77,4 +80,17 @@ export default class MainController
         this.onEditTodoItem.status = true;
         this.onEditTodoItem.element = todoItemView;
     }
+
+    checkCheckbox(todoItemView)
+    {   
+        parent = document.getElementById("displayTodoTasksContainer");
+        if (todoItemView.checkbox.checked) {
+            todoItemView.element.classList.add("onCheckbox");
+            parent.append(todoItemView.element);
+          } else {
+            todoItemView.element.classList.remove("onCheckbox");
+            parent.prepend(todoItemView.element);
+          }
+    }
 }
+

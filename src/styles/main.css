@@ -78,7 +78,7 @@ button, input[type="submit"], input[type="reset"] {
     width:50vw;
     background:#e1e1e17c;
     border-radius:8px;
-    box-shadow: 4px 4px 5px 0px #00000085;
+    box-shadow: 4px 4px 5px 0px #000000af;
     padding: 2vh 2vw;
 }
   
@@ -156,13 +156,10 @@ button, input[type="submit"], input[type="reset"] {
     background-image: linear-gradient(0deg, #d5fefd 0%, #fffcff 74%);
 }
 
-#displayTodoTasksContainer{
+#todoContainer{
     padding: 35px 55px;
     max-width: 800px;
     margin: 0 auto;
-}
-
-#displayTodoTasksContainer h1{
 }
 
 .todoTask {
@@ -207,12 +204,17 @@ button, input[type="submit"], input[type="reset"] {
 }
   
 .checkboxContainer input[type="checkbox"]:checked + label {
-    background-color: #e1e1e17c;
+    background-color: #bdbaba;
     border-color: #fefffe;
 }
   
 .checkboxContainer input[type="checkbox"]:checked + label:after {
     opacity: 1;
+}
+
+.onCheckbox{
+    opacity: 0.5;
+    text-decoration: line-through;
 }
 
 .todoTask h1{
