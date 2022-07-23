@@ -61,7 +61,35 @@ button, input[type="submit"], input[type="reset"] {
 /* SIDERBAR */
 #sidebar{
     background-color: #e1e1e17c;
-  
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+    padding: 1rem;
+}
+
+#sidebar button{
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    font-weight: 400;
+    font-size: clamp(1rem, 1vw, 4rem);
+}
+
+#sidebar button img{
+    width: clamp(1rem, 1.25vw, 2rem);
+}
+
+#priorityOptions h1, #projectOptions h1{
+    font-size: clamp(1rem, 1vw, 4rem);
+    font-weight: 200;
+}
+
+#priorityOptions, #projectOptions{
+    padding-left: 1rem;
+}
+
+#addProjectButton{
+    opacity: 0.5;
 }
 
 /* ADD TASK FORM */
@@ -76,7 +104,7 @@ button, input[type="submit"], input[type="reset"] {
 
 .form-container{
     width:50vw;
-    background:#e1e1e17c;
+    background:#e1e1e1;
     border-radius:8px;
     box-shadow: 4px 4px 5px 0px #000000af;
     padding: 2vh 2vw;
