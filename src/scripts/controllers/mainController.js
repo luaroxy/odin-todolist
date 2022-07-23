@@ -7,9 +7,9 @@ export default class MainController
         this.onEditTodoItem = {status: "false", element: ""};
 
         // hook up event handlers
-        view.addTaskButton.addEventListener("click", () => view.toggleAddTaskFormVisibility(true));
-        view.closeAddTaskButton.addEventListener("click", () => this.view.resetAndCloseAddTaskForm());
-        view.addTaskForm.addEventListener("submit", (e) => this.onAddTaskFormSubmit(e));
+        view.getByID("addTaskButton").addEventListener("click", () => view.toggleAddTaskFormVisibility(true));
+        view.getByID("closeAddTaskButton").addEventListener("click", () => view.resetAndCloseAddTaskForm());
+        view.getByID("addTaskForm").addEventListener("submit", (e) => this.onAddTaskFormSubmit(e));
     }
 
     onAddTaskFormSubmit(e)
@@ -83,7 +83,7 @@ export default class MainController
 
     checkCheckbox(todoItemView)
     {   
-        parent = document.getElementById("displayTodoTasksContainer");
+        parent = this.view.getByID("displayTodoTasksContainer");
         if (todoItemView.checkbox.checked) {
             todoItemView.element.classList.add("onCheckbox");
             parent.append(todoItemView.element);
