@@ -7,10 +7,10 @@ export default class MainView
         return document.getElementById(id);
     }
 
-    toggleAddTaskFormVisibility(visible)
+    toggleAddTaskFormVisibility(visible, id)
     {
         const displayValue = visible ? 'block' : 'none';
-        this.getByID("addTaskFormContainer").style.display = displayValue;
+        this.getByID(id).style.display = displayValue;
     }
     getAddTaskFormElementValueByName(elementName)
     {
@@ -19,7 +19,7 @@ export default class MainView
     resetAndCloseAddTaskForm()
     {
         this.getByID("addTaskForm").reset();
-        this.toggleAddTaskFormVisibility(false);
+        this.toggleAddTaskFormVisibility(false,"addTaskFormContainer");
     }
     appendTodoItem(item)
     {

@@ -7,9 +7,11 @@ export default class MainController
         this.onEditTodoItem = {status: "false", element: ""};
 
         // hook up event handlers
-        view.getByID("addTaskButton").addEventListener("click", () => view.toggleAddTaskFormVisibility(true));
+        view.getByID("addTaskButton").addEventListener("click", () => view.toggleAddTaskFormVisibility(true,"addTaskFormContainer"));
         view.getByID("closeAddTaskButton").addEventListener("click", () => view.resetAndCloseAddTaskForm());
         view.getByID("addTaskForm").addEventListener("submit", (e) => this.onAddTaskFormSubmit(e));
+        view.getByID("priorityButton").addEventListener("click", () => this.showOrHide("priorityImg","priorityOptions"));
+        view.getByID("projectButton").addEventListener("click", () => this.showOrHide("projectImg","projectOptions"));
     }
 
     onAddTaskFormSubmit(e)
@@ -75,7 +77,7 @@ export default class MainController
 
     editTodoItem(todoItemView)
     {
-        this.view.toggleAddTaskFormVisibility(true);
+        this.view.toggleAddTaskFormVisibility(true,"addTaskFormContainer");
         this.view.fillAddFormWhenEdit(todoItemView);
         this.onEditTodoItem.status = true;
         this.onEditTodoItem.element = todoItemView;
@@ -91,6 +93,20 @@ export default class MainController
             todoItemView.element.classList.remove("onCheckbox");
             parent.prepend(todoItemView.element);
           }
+    }
+
+    showOrHide(imgId, optionsId) 
+    {
+        if (this.view.getByID(optionsId).style.display == "block") 
+        {
+            this.view.getByID(imgId).src = "./images/downarrow.svg";
+            this.view.toggleAddTaskFormVisibility(false,optionsId);
+        }
+        else 
+        {
+            this.view.getByID(imgId).src = "./images/rightarrow.svg";
+            this.view.toggleAddTaskFormVisibility(true,optionsId);
+        }
     }
 }
 
