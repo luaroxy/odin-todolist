@@ -16,11 +16,13 @@ export default class MainView
     {
         return this.getByID("addTaskForm").elements[elementName].value;
     }
-    resetAndCloseAddTaskForm()
+
+    resetAndCloseFormByID(formID,formContainerID)
     {
-        this.getByID("addTaskForm").reset();
-        this.toggleAddTaskFormVisibility(false,"addTaskFormContainer");
+        this.getByID(formID).reset();
+        this.toggleAddTaskFormVisibility(false,formContainerID);
     }
+
     appendTodoItem(item)
     {
         // get template markup and clone element (deep copy)

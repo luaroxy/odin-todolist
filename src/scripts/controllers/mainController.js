@@ -8,7 +8,9 @@ export default class MainController
 
         // hook up event handlers
         view.getByID("addTaskButton").addEventListener("click", () => view.toggleAddTaskFormVisibility(true,"addTaskFormContainer"));
-        view.getByID("closeAddTaskButton").addEventListener("click", () => view.resetAndCloseAddTaskForm());
+        view.getByID("addProjectButton").addEventListener("click", () => view.toggleAddTaskFormVisibility(true,"addProjectFormContainer"));
+        view.getByID("closeAddTaskButton").addEventListener("click", () => view.resetAndCloseFormByID("addTaskForm","addTaskFormContainer"));
+        view.getByID("closeAddProjectButton").addEventListener("click", () => view.resetAndCloseFormByID("addProjectForm","addProjectFormContainer"));
         view.getByID("addTaskForm").addEventListener("submit", (e) => this.onAddTaskFormSubmit(e));
         view.getByID("priorityButton").addEventListener("click", () => this.showOrHide("priorityImg","priorityOptions"));
         view.getByID("projectButton").addEventListener("click", () => this.showOrHide("projectImg","projectOptions"));
@@ -19,7 +21,7 @@ export default class MainController
         e.preventDefault();
 
         this.onEditTodoItem.status == true ? this.updateTodoItem() : this.createNewTodoItem();
-        this.view.resetAndCloseAddTaskForm();
+        this.view.resetAndCloseFormByID("addTaskForm","addTaskFormContainer");
     }
 
     createNewTodoItem()

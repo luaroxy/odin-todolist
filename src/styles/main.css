@@ -83,9 +83,18 @@ button, input[type="submit"], input[type="reset"] {
     width: clamp(1rem, 1.25vw, 2rem);
 }
 
-#priorityOptions h1, #projectOptions h1{
+#priorityOptions h1, #projectOptions p {
     font-size: clamp(1rem, 1vw, 4rem);
     font-weight: 200;
+}
+
+.projectContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.projectContainer button img{
+    width: clamp(0.8rem, 1vw, 1.8rem);
 }
 
 #priorityOptions, #projectOptions{
@@ -97,7 +106,7 @@ button, input[type="submit"], input[type="reset"] {
 }
 
 /* ADD TASK FORM */
-#addTaskFormContainer {
+#addTaskFormContainer, #addProjectFormContainer {
     display: none;
     position: fixed;
     top: 50%;

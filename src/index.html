@@ -45,7 +45,7 @@
         </button>
 
         <div id="projectOptions" style="display: block">
-          <h1>Inbox</h1>
+          <p>Inbox</p>
         </div>
 
         <button id="addProjectButton">
@@ -110,6 +110,24 @@
         </form>
       </div>
 
+      <div id="addProjectFormContainer">
+        <form class="form-container" id="addProjectForm">
+          
+          <h2>New Project</h2>
+
+          <div class="inputContent">
+            <label for="projectName"><b>PROJECT NAME<abbr title="required" aria-label="required">*</b></label>
+            <input type="text" id="projectName" name="projectName" required placeholder="Write here the project name">
+          </div>
+
+          <div class="form-buttons">
+            <button type="button" id= "closeAddProjectButton" class="btn cancel">Close</button>
+            <button type="submit" id="addProjectBtn" class="btn">Add Project</button>
+          </div>
+        
+        </form>
+      </div>
+
     </div>
   </body>
   <!-- TEMPLATES -->
@@ -125,6 +143,17 @@
       <p class="project">Project</p>
       <button class="editButton"></button>
       <button class="deleteButton"></button>
+    </div>
+  </template>
+
+  <template id="projectTemplate">
+    <div class="projectContainer">
+      <p class="projName"></p>
+      
+      <button class="deleteProjectButton">
+        <img src="./images/delete.svg" alt="Delete"> 
+        Projects
+      </button>
     </div>
   </template>
 </html>
