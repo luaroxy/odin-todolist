@@ -1,4 +1,5 @@
 import TodoItemView from "./todoItemView";
+import ProjectView from "./projectView";
 
 export default class MainView
 {
@@ -17,12 +18,16 @@ export default class MainView
         return this.getByID("addTaskForm").elements[elementName].value;
     }
 
+    getAddProjectFormElementValueByName(elementName)
+    {
+        return this.getByID("addProjectForm").elements[elementName].value;
+    }
+
     resetAndCloseFormByID(formID,formContainerID)
     {
         this.getByID(formID).reset();
         this.toggleAddTaskFormVisibility(false,formContainerID);
     }
-
     appendTodoItem(item)
     {
         // get template markup and clone element (deep copy)
@@ -34,6 +39,18 @@ export default class MainView
         this.getByID("displayTodoTasksContainer").append(todoItemView.element);
 
         return todoItemView;
+    }
+    appendProject(item)
+    {
+        // get template markup and clone element (deep copy)
+        let templateContent = this.getByID("projectTemplate").content;
+        let projectDivElementClone = templateContent.cloneNode(true).querySelector("div");
+        let projectView = new ProjectView(projectDivElementClone, item);
+
+        // then insert cloned markup as new child of todo tasks container
+        this.getByID("projectOptions").append(projectView.element);
+
+        return projectView;
     }
     fillAddFormWhenEdit(todoItemView)
     {

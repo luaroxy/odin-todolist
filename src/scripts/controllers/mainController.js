@@ -6,14 +6,14 @@ export default class MainController
         this.view = view;
         this.onEditTodoItem = {status: "false", element: ""};
 
-        // hook up event handlers
         view.getByID("addTaskButton").addEventListener("click", () => view.toggleAddTaskFormVisibility(true,"addTaskFormContainer"));
-        view.getByID("addProjectButton").addEventListener("click", () => view.toggleAddTaskFormVisibility(true,"addProjectFormContainer"));
         view.getByID("closeAddTaskButton").addEventListener("click", () => view.resetAndCloseFormByID("addTaskForm","addTaskFormContainer"));
-        view.getByID("closeAddProjectButton").addEventListener("click", () => view.resetAndCloseFormByID("addProjectForm","addProjectFormContainer"));
         view.getByID("addTaskForm").addEventListener("submit", (e) => this.onAddTaskFormSubmit(e));
         view.getByID("priorityButton").addEventListener("click", () => this.showOrHide("priorityImg","priorityOptions"));
         view.getByID("projectButton").addEventListener("click", () => this.showOrHide("projectImg","projectOptions"));
+        view.getByID("addProjectButton").addEventListener("click", () => view.toggleAddTaskFormVisibility(true,"addProjectFormContainer"));
+        view.getByID("closeAddProjectButton").addEventListener("click", () => view.resetAndCloseFormByID("addProjectForm","addProjectFormContainer"));
+        view.getByID("addProjectForm").addEventListener("submit", (e) => this.onAddProjectFormSubmit(e));
     }
 
     onAddTaskFormSubmit(e)
@@ -109,6 +109,34 @@ export default class MainController
             this.view.getByID(imgId).src = "./images/rightarrow.svg";
             this.view.toggleAddTaskFormVisibility(true,optionsId);
         }
+    }
+
+    onAddProjectFormSubmit(e)
+    {
+        e.preventDefault();
+
+        this.createNewProject();
+        this.view.resetAndCloseFormByID("addProjectForm","addProjectFormContainer");
+    }
+
+    createNewProject()
+    {
+        const name = this.view.getAddProjectFormElementValueByName("projectName");
+        const newProject = this.model.createNewProject(name);        
+        this.appendAndHookUpNewProjectFromModel(newProject);
+    }
+
+    appendAndHookUpNewProjectFromModel(newProject)
+    {
+        const newProjectView = this.view.appendProject(newProject);
+
+        newProjectView.deleteButton.addEventListener("click", 
+            () => this.deleteProject(newProjectView));
+    }
+    
+    deleteProject(projectView)
+    {
+        projectView.element.remove();
     }
 }
 

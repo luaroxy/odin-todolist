@@ -1,5 +1,6 @@
 import TodoList from './todoList';
 import TodoItem from './todoItem';
+import Project from './project';
 
 export default class MainModel
 {
@@ -30,5 +31,10 @@ export default class MainModel
     removeItemById(id)
     {
         this.list.removeById(id);
+    }
+
+    createNewProject(name)
+    {
+        return new Project(name);
     }
 } 
