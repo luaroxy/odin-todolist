@@ -55,7 +55,7 @@ export default class TodoItemView
     {
         this.element.setAttribute("id", value);
 
-        const checkBoxId = `checkbox-${value}`
+        const checkBoxId = `checkbox-${value}`;
         this.checkbox.setAttribute("id", checkBoxId);
         this.checkboxLabel.setAttribute("for", checkBoxId);
     }

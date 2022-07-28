@@ -42,13 +42,18 @@ export default class MainView
     }
     appendProject(item)
     {
-        // get template markup and clone element (deep copy)
+        // Project in sidebar
         let templateContent = this.getByID("projectTemplate").content;
         let projectDivElementClone = templateContent.cloneNode(true).querySelector("div");
         let projectView = new ProjectView(projectDivElementClone, item);
-
-        // then insert cloned markup as new child of todo tasks container
         this.getByID("projectOptions").append(projectView.element);
+
+        // Project in AddTaskForm
+        let option = document.createElement("option");
+        option.value = item.name;
+        option.text = item.name;
+        option.id = `checkbox-${item.id}`;
+        this.getByID("taskProject").appendChild(option);
 
         return projectView;
     }

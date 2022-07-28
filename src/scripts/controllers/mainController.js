@@ -136,6 +136,7 @@ export default class MainController
     
     deleteProject(projectView)
     {
+        this.view.getByID(`checkbox-${projectView.element.id}`).remove();
         projectView.element.remove();
     }
 }
