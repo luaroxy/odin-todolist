@@ -14,6 +14,7 @@ export default class MainController
         view.getByID("addProjectButton").addEventListener("click", () => view.toggleAddTaskFormVisibility(true,"addProjectFormContainer"));
         view.getByID("closeAddProjectButton").addEventListener("click", () => view.resetAndCloseFormByID("addProjectForm","addProjectFormContainer"));
         view.getByID("addProjectForm").addEventListener("submit", (e) => this.onAddProjectFormSubmit(e));
+        view.getByID("inbox").addEventListener("click", () => this.filterProject("Inbox"));
     }
 
     onAddTaskFormSubmit(e)
@@ -132,12 +133,20 @@ export default class MainController
 
         newProjectView.deleteButton.addEventListener("click", 
             () => this.deleteProject(newProjectView));
+
+        newProjectView.projectNameP.addEventListener("click", 
+            () => this.filterProject(newProjectView.projectNameP.textContent));
     }
     
     deleteProject(projectView)
     {
         this.view.getByID(`checkbox-${projectView.element.id}`).remove();
         projectView.element.remove();
+    }
+
+    filterProject(projectName)
+    {
+        console.log(projectName);
     }
 }
 
