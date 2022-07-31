@@ -77,14 +77,13 @@ export default class TodoItemView
     }
     set priority(value)
     {
-        // TODO: can we delegate this to CSS?
         switch(value)
         {
             case "lowPriority":
                 this.checkboxLabel.style.border = "2px solid blue";
                 break;
             case "mediumPriority":
-                this.checkboxLabel.style.border = "2px solid yellow";
+                this.checkboxLabel.style.border = "2px solid #f2f221";
                 break;
             case "highPriority":
                 this.checkboxLabel.style.border = "2px solid red";

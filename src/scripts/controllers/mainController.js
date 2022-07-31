@@ -14,7 +14,11 @@ export default class MainController
         view.getByID("addProjectButton").addEventListener("click", () => view.toggleAddTaskFormVisibility(true,"addProjectFormContainer"));
         view.getByID("closeAddProjectButton").addEventListener("click", () => view.resetAndCloseFormByID("addProjectForm","addProjectFormContainer"));
         view.getByID("addProjectForm").addEventListener("submit", (e) => this.onAddProjectFormSubmit(e));
-        view.getByID("inbox").addEventListener("click", () => this.filterProject("Inbox"));
+        view.getByID("inbox").addEventListener("click", () => this.filterByProject("Inbox"));
+        view.getByID("noPriority").addEventListener("click", () => this.filterByPriority("noPriority", "None"));
+        view.getByID("lowPriority").addEventListener("click", () => this.filterByPriority("lowPriority", "Low"));
+        view.getByID("mediumPriority").addEventListener("click", () => this.filterByPriority("mediumPriority", "Medium"));
+        view.getByID("highPriority").addEventListener("click", () => this.filterByPriority("highPriority", "High"));
     }
 
     onAddTaskFormSubmit(e)
@@ -135,7 +139,7 @@ export default class MainController
             () => this.deleteProject(newProjectView));
 
         newProjectView.projectNameP.addEventListener("click", 
-            () => this.filterProject(newProjectView.projectNameP.textContent));
+            () => this.filterByProject(newProjectView.projectNameP.textContent));
     }
     
     deleteProject(projectView)
@@ -144,9 +148,32 @@ export default class MainController
         projectView.element.remove();
     }
 
-    filterProject(projectName)
+    filterByProject(projectName)
     {
-        console.log(projectName);
+        let todoListObj = this.model.list.itemsById;
+
+        Object.keys(todoListObj).forEach(key => 
+            {
+                const statusValue = todoListObj[key].project == projectName ? true : false;
+                this.view.toggleFilterVisibility(statusValue,key);
+            }
+        );
+
+        this.view.getByID("titleName").textContent = projectName;
+    }
+
+    filterByPriority(priority, priorityName)
+    {
+        let todoListObj = this.model.list.itemsById;
+
+        Object.keys(todoListObj).forEach(key => 
+            {
+                const statusValue = todoListObj[key].priority == priority ? true : false;
+                this.view.toggleFilterVisibility(statusValue,key);
+            }
+        );
+
+        this.view.getByID("titleName").textContent = `Priority: ${priorityName}`;
     }
 }
 

@@ -13,6 +13,13 @@ export default class MainView
         const displayValue = visible ? 'block' : 'none';
         this.getByID(id).style.display = displayValue;
     }
+
+    toggleFilterVisibility(visible, id)
+    {
+        const displayValue = visible ? 'grid' : 'none';
+        this.getByID(id).style.display = displayValue;
+    }
+
     getAddTaskFormElementValueByName(elementName)
     {
         return this.getByID("addTaskForm").elements[elementName].value;
