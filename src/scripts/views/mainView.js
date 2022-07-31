@@ -10,8 +10,7 @@ export default class MainView
 
     toggleAddTaskFormVisibility(visible, id)
     {
-        const displayValue = visible ? 'block' : 'none';
-        this.getByID(id).style.display = displayValue;
+        this.getByID(id).style.display = visible && 'block' || 'none';
     }
     getAddTaskFormElementValueByName(elementName)
     {
