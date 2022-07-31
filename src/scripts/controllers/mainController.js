@@ -19,6 +19,7 @@ export default class MainController
         view.getByID("lowPriority").addEventListener("click", () => this.filterByPriority("lowPriority", "Low"));
         view.getByID("mediumPriority").addEventListener("click", () => this.filterByPriority("mediumPriority", "Medium"));
         view.getByID("highPriority").addEventListener("click", () => this.filterByPriority("highPriority", "High"));
+        view.getByID("todayButton").addEventListener("click", () => this.filterByDuedate());
     }
 
     onAddTaskFormSubmit(e)
@@ -174,6 +175,24 @@ export default class MainController
         );
 
         this.view.getByID("titleName").textContent = `Priority: ${priorityName}`;
+
+        let today = new Date().toJSON().slice(0, 10);
+        console.log(today);
+    }
+
+    filterByDuedate()
+    {
+        let today = new Date().toJSON().slice(0, 10);
+        let todoListObj = this.model.list.itemsById;
+
+        Object.keys(todoListObj).forEach(key => 
+            {
+                const statusValue = todoListObj[key].dueDate == today ? true : false;
+                this.view.toggleFilterVisibility(statusValue,key);
+            }
+        );
+
+        this.view.getByID("titleName").textContent = "Today";
     }
 }
 
