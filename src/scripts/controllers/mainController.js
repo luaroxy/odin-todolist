@@ -20,6 +20,7 @@ export default class MainController
         view.getByID("mediumPriority").addEventListener("click", () => this.filterByPriority("mediumPriority", "Medium"));
         view.getByID("highPriority").addEventListener("click", () => this.filterByPriority("highPriority", "High"));
         view.getByID("todayButton").addEventListener("click", () => this.filterByDuedate());
+        window.addEventListener("load", () => this.retrieveRecords());
     }
 
     onAddTaskFormSubmit(e)
@@ -34,6 +35,8 @@ export default class MainController
     {
         const newTodoItem = this.createNewTodoItemFromFormInputs();        
         this.appendAndHookUpNewTodoItemFromModel(newTodoItem);
+
+        this.model.updateTodoListLocalStorage();
     }
 
     updateTodoItem()
@@ -42,6 +45,8 @@ export default class MainController
         const updatedTodoItem = this.model.updateTodoItem(this.onEditTodoItem.element,formElements.name, formElements.desc, formElements.dueDate, formElements.project, formElements.priority)
         this.view.updateTodoItem(updatedTodoItem);
         this.onEditTodoItem.status = false;
+        
+        this.model.updateTodoListLocalStorage();
     }
 
     getElementsFromFormInputs()
@@ -81,6 +86,8 @@ export default class MainController
     {
         this.model.removeItemById(todoItemView.id);
         todoItemView.element.remove();
+
+        this.model.updateTodoListLocalStorage();
     }
 
     editTodoItem(todoItemView)
@@ -128,8 +135,10 @@ export default class MainController
     createNewProject()
     {
         const name = this.view.getAddProjectFormElementValueByName("projectName");
-        const newProject = this.model.createNewProject(name);        
+        const newProject = this.model.createNewProject(name);      
         this.appendAndHookUpNewProjectFromModel(newProject);
+
+        this.model.updateProjectListLocalStorage();
     }
 
     appendAndHookUpNewProjectFromModel(newProject)
@@ -145,13 +154,15 @@ export default class MainController
     
     deleteProject(projectView)
     {
-        this.view.getByID(`checkbox-${projectView.element.id}`).remove();
+        this.model.removeProjectById(projectView.id);
         projectView.element.remove();
+
+        this.model.updateProjectListLocalStorage();
     }
 
     filterByProject(projectName)
     {
-        let todoListObj = this.model.list.itemsById;
+        let todoListObj = this.model.todoList.itemsById;
 
         Object.keys(todoListObj).forEach(key => 
             {
@@ -165,7 +176,7 @@ export default class MainController
 
     filterByPriority(priority, priorityName)
     {
-        let todoListObj = this.model.list.itemsById;
+        let todoListObj = this.model.todoList.itemsById;
 
         Object.keys(todoListObj).forEach(key => 
             {
@@ -183,7 +194,7 @@ export default class MainController
     filterByDuedate()
     {
         let today = new Date().toJSON().slice(0, 10);
-        let todoListObj = this.model.list.itemsById;
+        let todoListObj = this.model.todoList.itemsById;
 
         Object.keys(todoListObj).forEach(key => 
             {
@@ -193,6 +204,42 @@ export default class MainController
         );
 
         this.view.getByID("titleName").textContent = "Today";
+    }
+
+    retrieveRecords()
+    {
+        this.retrieveProjects();
+        this.retrieveTodoList();
+    }
+
+    retrieveProjects()
+    {
+        if (window.localStorage.getItem('projectList')!== null){
+            let temp = (JSON.parse(localStorage.getItem('projectList'))); 
+            let projectListObj = temp.projectsById;
+
+            Object.keys(projectListObj).forEach(key => 
+            {
+                const newProject = this.model.createNewProject(projectListObj[key].name);      
+                this.appendAndHookUpNewProjectFromModel(newProject);
+            }
+        );
+        }
+    }
+
+    retrieveTodoList()
+    {
+        if (window.localStorage.getItem('todoList')!== null){
+            let temp = (JSON.parse(localStorage.getItem('todoList'))); 
+            let todoListObj = temp.itemsById;
+
+            Object.keys(todoListObj).forEach(key => 
+            {
+                const newTodoItem = this.model.createAndAddNewTodoItem(todoListObj[key].name, todoListObj[key].description, todoListObj[key].dueDate, todoListObj[key].project, todoListObj[key].priority);
+                this.appendAndHookUpNewTodoItemFromModel(newTodoItem);
+            }
+        );
+        }
     }
 }
 

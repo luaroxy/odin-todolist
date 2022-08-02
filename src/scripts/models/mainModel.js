@@ -1,18 +1,20 @@
 import TodoList from './todoList';
 import TodoItem from './todoItem';
 import Project from './project';
+import ProjectList from './projectList';
 
 export default class MainModel
 {
     constructor()
     {
-        this.list = new TodoList();
+        this.todoList = new TodoList();
+        this.projectList = new ProjectList();
     }
 
     createAndAddNewTodoItem(name, description, dueDate, project, priority)
     {
         const newTodoItem = new TodoItem(name, description, dueDate, project, priority);
-        this.list.add(newTodoItem);
+        this.todoList.add(newTodoItem);
 
         return newTodoItem;
     }
@@ -30,11 +32,29 @@ export default class MainModel
 
     removeItemById(id)
     {
-        this.list.removeById(id);
+        this.todoList.removeById(id);
     }
 
     createNewProject(name)
     {
-        return new Project(name);
+        const newProject = new Project(name);
+        this.projectList.add(newProject);
+
+        return newProject;
+    }
+
+    removeProjectById(id)
+    {
+        this.projectList.removeById(id);
+    }
+
+    updateTodoListLocalStorage()
+    {
+        window.localStorage.setItem('todoList', JSON.stringify(this.todoList));
+    }
+
+    updateProjectListLocalStorage()
+    {
+        window.localStorage.setItem('projectList', JSON.stringify(this.projectList));
     }
 } 
