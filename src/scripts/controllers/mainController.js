@@ -63,7 +63,7 @@ export default class MainController
     createNewTodoItemFromFormInputs()
     {
         const formElements = this.getElementsFromFormInputs();
-        return this.model.createAndAddNewTodoItem(formElements.name, formElements.desc, formElements.dueDate, formElements.project, formElements.priority);
+        return this.model.createAndAddNewTodoItem(formElements.name, formElements.desc, formElements.dueDate, formElements.project, formElements.priority, false);
     }
 
     appendAndHookUpNewTodoItemFromModel(todoItem)
@@ -80,6 +80,7 @@ export default class MainController
         newTodoItemView.checkbox.addEventListener("change", 
             () => this.checkCheckbox(newTodoItemView));
 
+        return newTodoItemView;
     }
     
     deleteTodoItem(todoItemView)
@@ -104,10 +105,13 @@ export default class MainController
         if (todoItemView.checkbox.checked) {
             todoItemView.element.classList.add("onCheckbox");
             parent.append(todoItemView.element);
-          } else {
+            this.model.updateCheckbox(todoItemView.id, true);
+        } else {
             todoItemView.element.classList.remove("onCheckbox");
             parent.prepend(todoItemView.element);
-          }
+            this.model.updateCheckbox(todoItemView.id, false);
+        }
+        this.model.updateTodoListLocalStorage();
     }
 
     showOrHide(imgId, optionsId) 
@@ -235,11 +239,28 @@ export default class MainController
 
             Object.keys(todoListObj).forEach(key => 
             {
-                const newTodoItem = this.model.createAndAddNewTodoItem(todoListObj[key].name, todoListObj[key].description, todoListObj[key].dueDate, todoListObj[key].project, todoListObj[key].priority);
-                this.appendAndHookUpNewTodoItemFromModel(newTodoItem);
-            }
-        );
+                const newTodoItem = this.model.createAndAddNewTodoItem(todoListObj[key].name, todoListObj[key].description, todoListObj[key].dueDate, todoListObj[key].project, todoListObj[key].priority, todoListObj[key].checkboxStatus);
+                const newTodoItemView = this.appendAndHookUpNewTodoItemFromModel(newTodoItem);
+            });
+
+            this.retrieveCheckbox();
         }
+    }
+
+    retrieveCheckbox()
+    {
+        let todoListObj = this.model.todoList.itemsById;
+        Object.keys(todoListObj).forEach(key => 
+            {
+                if(todoListObj[key].checkboxStatus == true)
+                {
+                    let todoItem = this.view.getByID(todoListObj[key].id);
+                    todoItem.classList.add("onCheckbox");
+                    this.view.getByID(`checkbox-${todoListObj[key].id}`).checked = true;
+                    parent = this.view.getByID("displayTodoTasksContainer")
+                    parent.append(todoItem);
+                }
+            });
     }
 }
 

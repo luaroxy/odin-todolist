@@ -11,9 +11,9 @@ export default class MainModel
         this.projectList = new ProjectList();
     }
 
-    createAndAddNewTodoItem(name, description, dueDate, project, priority)
+    createAndAddNewTodoItem(name, description, dueDate, project, priority,checkboxStatus)
     {
-        const newTodoItem = new TodoItem(name, description, dueDate, project, priority);
+        const newTodoItem = new TodoItem(name, description, dueDate, project, priority, checkboxStatus);
         this.todoList.add(newTodoItem);
 
         return newTodoItem;
@@ -57,4 +57,10 @@ export default class MainModel
     {
         window.localStorage.setItem('projectList', JSON.stringify(this.projectList));
     }
+
+    updateCheckbox(id, value)
+    {
+        this.todoList.getItemByID(id).checkboxStatus = value;
+    }
+
 } 
