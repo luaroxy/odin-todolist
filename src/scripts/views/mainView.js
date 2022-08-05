@@ -37,12 +37,12 @@ export default class MainView
     }
     appendTodoItem(item)
     {
-        // get template markup and clone element (deep copy)
+        // get template markup and clone element
         let templateContent = this.getByID("todoItemTemplate").content;
         let todoItemDivElementClone = templateContent.cloneNode(true).querySelector("div");
         let todoItemView = new TodoItemView(todoItemDivElementClone, item);
 
-        // then insert cloned markup as new child of todo tasks container
+        // insert cloned markup as new child of todo tasks container
         this.getByID("displayTodoTasksContainer").append(todoItemView.element);
 
         return todoItemView;
@@ -77,4 +77,11 @@ export default class MainView
         let todoItemToUpdate = this.getByID(element.id);
         new TodoItemView(todoItemToUpdate,element.model);
     }
+
+    updateTodoItemAfterProjectDeleted(element)
+    {
+        let todoItemToUpdate = this.getByID(element.id);
+        new TodoItemView(todoItemToUpdate,element);
+    }
+
 } 

@@ -63,4 +63,14 @@ export default class MainModel
         this.todoList.getItemByID(id).checkboxStatus = value;
     }
 
+    getTodayDate()
+    {
+        let today = new Date(); 
+
+        function addZ(n) {
+            return (n<10? '0' : '') + n;
+        }
+
+        return today.getFullYear() + '-' + addZ(today.getMonth() + 1) + '-' + addZ(today.getDate());
+    }
 } 

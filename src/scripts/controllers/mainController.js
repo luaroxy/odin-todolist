@@ -158,10 +158,25 @@ export default class MainController
     
     deleteProject(projectView)
     {
+        this.updateDeletedProjectToIndex(projectView.model.name);
         this.model.removeProjectById(projectView.id);
         projectView.element.remove();
 
         this.model.updateProjectListLocalStorage();
+        this.model.updateTodoListLocalStorage();
+    }
+
+    updateDeletedProjectToIndex(deletedProjectName)
+    {
+        let todoListObj = this.model.todoList.itemsById;
+        Object.keys(todoListObj).forEach(key => 
+            {
+                if(todoListObj[key].project == deletedProjectName)
+                {
+                    todoListObj[key].project = "Inbox";
+                    this.view.updateTodoItemAfterProjectDeleted(todoListObj[key]);
+                }
+            });
     }
 
     filterByProject(projectName)
@@ -190,14 +205,12 @@ export default class MainController
         );
 
         this.view.getByID("titleName").textContent = `Priority: ${priorityName}`;
-
-        let today = new Date().toJSON().slice(0, 10);
-        console.log(today);
     }
 
     filterByDuedate()
     {
-        let today = new Date().toJSON().slice(0, 10);
+        let today = this.model.getTodayDate();
+
         let todoListObj = this.model.todoList.itemsById;
 
         Object.keys(todoListObj).forEach(key => 
