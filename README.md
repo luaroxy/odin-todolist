@@ -1,5 +1,7 @@
 # Justdoit - Todo List
+<a href="https://luaroxy.github.io/odin-todolist/">Live Demo </a>
 
+![](images/justdoit.png)
 
 # About the Project
 Justdoit is a todo list application created using vanilla JavaScript and storage using localStorage. It helps you to manage your personal and professional productivity. 
