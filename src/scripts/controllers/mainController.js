@@ -160,6 +160,7 @@ export default class MainController
     {
         this.updateDeletedProjectToInbox(projectView.model.name);
         this.model.removeProjectById(projectView.id);
+        this.view.getByID(`checkbox-${projectView.id}`).remove();
         projectView.element.remove();
 
         this.model.updateProjectListLocalStorage();
