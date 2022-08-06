@@ -158,7 +158,7 @@ export default class MainController
     
     deleteProject(projectView)
     {
-        this.updateDeletedProjectToIndex(projectView.model.name);
+        this.updateDeletedProjectToInbox(projectView.model.name);
         this.model.removeProjectById(projectView.id);
         projectView.element.remove();
 
@@ -166,7 +166,7 @@ export default class MainController
         this.model.updateTodoListLocalStorage();
     }
 
-    updateDeletedProjectToIndex(deletedProjectName)
+    updateDeletedProjectToInbox(deletedProjectName)
     {
         let todoListObj = this.model.todoList.itemsById;
         Object.keys(todoListObj).forEach(key => 
